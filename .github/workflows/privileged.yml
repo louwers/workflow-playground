@@ -7,6 +7,7 @@ on:
 jobs:
   privileged_job:
     runs-on: ubuntu-latest
+    if: toJSON(github.event.workflow_run.pull_requests) != '[]'
     steps:
       - run: echo "Hello from privileged"
       - name: 'Download artifact'
