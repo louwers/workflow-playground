@@ -10,7 +10,7 @@ on:
 jobs:
   job2:
     runs-on: ubuntu-latest
-    # if: toJSON(github.event.workflow_run.pull_requests) != '[]'
+    if: toJSON(github.event.workflow_run.pull_requests) != '[]'
     steps:
       - run: echo ${{ github.event.workflow_run.pull_requests }}
       - name: 'Download artifact'
@@ -32,7 +32,7 @@ jobs:
                archive_format: 'zip',
             });
             let fs = require('fs');
-            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/test-artifact.zip`, Buffer.from(download.data));
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/test123-artifact.zip`, Buffer.from(download.data));
 
       - run: ls -R
 
