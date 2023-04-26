@@ -7,7 +7,7 @@ on:
       - completed
 
 jobs:
-  privileged_job:
+  job2:
     runs-on: ubuntu-latest
     if: toJSON(github.event.workflow_run.pull_requests) != '[]'
     steps:
