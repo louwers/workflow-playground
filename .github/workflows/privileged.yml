@@ -3,7 +3,7 @@ name: privileged
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: [prworkflow]
+    workflows: [pr]
     types:
       - completed
 
