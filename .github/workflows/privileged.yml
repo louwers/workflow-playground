@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     if: toJSON(github.event.workflow_run.pull_requests) != '[]'
     steps:
-      - run: echo ${{ github.event.workflow_run.pull_requests }}
+      - run: echo ${{ toJSON(github.event.workflow_run.pull_requests) }}
       - name: 'Download artifact'
         uses: actions/github-script@v6
         with:
