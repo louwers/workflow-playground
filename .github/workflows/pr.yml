@@ -8,7 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: touch test123
+      - name: Save PR number
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          mkdir -p ./pr
+          echo $PR_NUMBER > ./pr_number
       - uses: actions/upload-artifact@v3
         with:
           name: test123-artifact
-          path: test123
+          path: |
+            - test123
+            - pr_number
