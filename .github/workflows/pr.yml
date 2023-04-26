@@ -1,0 +1,12 @@
+on:
+  pull_request:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: touch test123
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test123-artifact
+          path: test123
