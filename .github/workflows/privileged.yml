@@ -10,9 +10,9 @@ on:
 jobs:
   job2:
     runs-on: ubuntu-latest
-    if: toJSON(github.event.workflow_run.pull_requests) != '[]'
+    # if: toJSON(github.event.workflow_run.pull_requests) != '[]'
     steps:
-      - run: echo "Hello from privileged"
+      - run: echo ${{ github.event.workflow_run.pull_requests }}
       - name: 'Download artifact'
         uses: actions/github-script@v6
         with:
