@@ -1,3 +1,5 @@
+name: privileged
+
 on:
   workflow_run:
     workflows: [pr]
