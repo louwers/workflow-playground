@@ -30,8 +30,8 @@ jobs:
             let fs = require('fs');
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/test-artifact.zip`, Buffer.from(download.data));
 
-    - run: ls -R
+      - run: ls -R
 
-    - run: unzip test123-artifact.zip
+      - run: unzip test123-artifact.zip
 
-    - run ls -R
+      - run: ls -R
