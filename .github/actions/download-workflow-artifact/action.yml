@@ -1,0 +1,12 @@
+name: 'download-workflow-artifact'
+description: 'Downloads an artifact from a workflow'
+inputs:
+  artifact-name:
+    description: "Artifact name"
+    required: true
+  save-as:
+    description: "Location to store the artifact"
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
