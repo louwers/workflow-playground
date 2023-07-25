@@ -16,7 +16,7 @@ jobs:
     if: github.event.workflow_run.event == 'pull_request'
     steps:
       - uses: actions/checkout@v3
-      - run: echo "${{ toJSON(github.event.workflow_run) }}"
+      - run: echo "${{ github.event.workflow_run.pull_requests[0].number }}"
       - name: 'Download artifact'
         uses: ./.github/actions/download-workflow-run-artifact
         with:
@@ -26,15 +26,14 @@ jobs:
       - run: ls -R
 
       - name: 'Leave comment on PR with test results'
-        uses: actions/github-script@v6
+        if: github.event.workflow_run.event == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            console.log(context.payload)
-            let fs = require('fs');
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: `Hello world`
-            });
+          header: size-test-result
+          number: ${{ github.event.workflow_run.pull_requests[0].number }}
+          message: |
+            ### Size test result
+
+            Old size: ${{ env.old_size }} bytes
+            New size: ${{ env.new_size }} bytes
+            Difference: **${{ env.percentage_change }}**
