@@ -21,9 +21,7 @@ jobs:
         uses: ./.github/actions/download-workflow-artifact
         with:
           artifact-name: test123-artifact
-          save-as: test123-artifact.zip
-
-      - run: unzip test123-artifact.zip
+          expect-files: "README.md"
 
       - run: ls -R
 
@@ -32,10 +30,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            console.log(context.payload)
             let fs = require('fs');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: Number(fs.readFileSync('./pr_number')),
+              issue_number: context.payload.pull_request.number,
               body: `Hello world`
             });
