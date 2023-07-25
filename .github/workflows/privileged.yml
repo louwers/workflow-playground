@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: echo "${{ toJSON(github.event.workflow_run) }}"
       - name: 'Download artifact'
-        uses: ./.github/actions/download-workflow-artifact
+        uses: ./.github/actions/download-workflow-run-artifact
         with:
           artifact-name: test123-artifact
           expect-files: "README.md"
