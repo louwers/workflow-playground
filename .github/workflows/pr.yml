@@ -14,9 +14,5 @@ jobs:
         with:
           issue-number: 2
           body-includes: '^\/benchmark.*android.*$'
-
-      - run: |
-        echo ${{ steps.fc.outputs.comment-id }}
-        echo ${{ steps.fc.outputs.comment-body }}
-        echo ${{ steps.fc.outputs.comment-author }}
-        echo ${{ steps.fc.outputs.comment-created-at }}
+          
+      - run: echo ${{ steps.fc.outputs.comment-id }}
