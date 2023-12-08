@@ -2,17 +2,21 @@ name: pr
 
 on:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: touch test123
-
-      - run: ls -R
-
-      - uses: actions/upload-artifact@v3
+      - name: Needs benchmark
+        uses: peter-evans/find-comment@v2
+        id: fc
         with:
-          name: test123-artifact
-          path: |
-            ./test123
+          issue-number: 2
+          body-includes: '^\/benchmark.*android.*$'
+
+      - run: |
+        echo ${{ steps.fc.outputs.comment-id }}
+        echo ${{ steps.fc.outputs.comment-body }}
+        echo ${{ steps.fc.outputs.comment-author }}
+        echo ${{ steps.fc.outputs.comment-created-at }}
