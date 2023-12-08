@@ -13,6 +13,6 @@ jobs:
         id: fc
         with:
           issue-number: 2
-          body-includes: '^!benchmark.*android.*$'
+          body-regex: '^!benchmark.*android.*$'
           
       - run: echo ${{ steps.fc.outputs.comment-id }}
