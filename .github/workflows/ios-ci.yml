@@ -1,0 +1,23 @@
+name: ios-ci
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        type: choice
+        default: no
+        options:
+          - full
+          - pre
+          - no
+        description: Whether to make a release, choose full release (uses platform/ios/VERSION) or pre-release
+
+jobs:
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ github.event_name != 'workflow_dispatch' && steps.changed-files-yaml.outputs.ios_any_changed != 'true' }}
+    steps:
+      - name: Maybe skip
+        if: github.event.inputs.release
+        run: echo "skip or not"
