@@ -5,11 +5,11 @@ on:
     inputs:
       release:
         type: choice
-        default: no
+        default: "false"
         options:
           - full
           - pre
-          - no
+          - "false"
         description: Whether to make a release, choose full release (uses platform/ios/VERSION) or pre-release
 
 jobs:
