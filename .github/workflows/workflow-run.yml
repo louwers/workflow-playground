@@ -10,6 +10,7 @@ jobs:
   should-run-workflow-run:
     runs-on: ubuntu-latest
     steps:
+      - run: echo '${{ toJSON(github.event.workflow_run) }}'
       - run: |
           conclusion=$(curl ${{ github.event.workflow_run.jobs_url }} | jq -r '.jobs[] | select(.name == "job2").conclusion')
           echo $conclusion
