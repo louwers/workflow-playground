@@ -11,12 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          conclusion=$(curl ${{ github.event.workflow_run.jobs_url }} | jq '.jobs[] | select(.name == "job2").conclusion')
+          conclusion=$(curl ${{ github.event.workflow_run.jobs_url }} | jq -r '.jobs[] | select(.name == "job2").conclusion')
           echo $conclusion
           should_skip=$([ "$conclusion" = "skipped" ] && echo "true" || echo "false")
-          echo $should_skip
+          echo "should_skip=$should_skip" >> "$GITHUB_OUTPUT"
 
   workflow-run:
+    needs: should-run-workflow-run
+    if: needs.should-run-workflow-run.outputs.should_skip
     runs-on: ubuntu-latest
     steps:
       - run: echo '${{ toJSON(github.event.workflow_run) }}'
