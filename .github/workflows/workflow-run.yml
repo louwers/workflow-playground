@@ -10,4 +10,4 @@ jobs:
   workflow-run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{ github.event.workflow_run }}'
+      - run: echo '${{ toJSON(github.event.workflow_run) }}'
