@@ -16,3 +16,9 @@ jobs:
           body-regex: '^!benchmark.*android.*$'
           
       - run: echo ${{ steps.fc.outputs.comment-id }}
+
+  job2:
+    runs-on: ubuntu-latest
+    if: ${{ 'true' == 'false' }}
+    steps:
+      - run: echo "hello"
